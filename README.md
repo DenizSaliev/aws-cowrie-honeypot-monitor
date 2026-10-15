@@ -6,7 +6,8 @@ Despliegue de un sistema de ciberseguridad defensiva y decepción (*honeypot*) e
 
 ##  Arquitectura del Sistema
 
-<img width="724" height="664" alt="image" src="https://github.com/user-attachments/assets/81599fb7-3ea8-4345-b4ed-e9bfd400dbaa" />
+<img width="719" height="641" alt="{086FDDF8-D91D-4F35-A82E-BE7CAD92F9C0}" src="https://github.com/user-attachments/assets/fbd96e2e-b783-4d67-a683-33dceb6360a2" />
+
 
 
 ##  Características Principales
