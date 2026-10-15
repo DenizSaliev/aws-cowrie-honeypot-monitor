@@ -1,0 +1,15 @@
+[Unit]
+Description=Cowrie Honeypot Discord Alert Monitor
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu
+ExecStart=/home/ubuntu/alert-env/bin/python /home/ubuntu/discord_alert.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
