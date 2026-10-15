@@ -64,4 +64,3 @@ sudo cp honeypot-alert.service /etc/systemd/system/
 sudo systemctl daemon-reload
 sudo systemctl enable --now honeypot-alert.service
 
-<img width="486" height="309" alt="image" src="https://github.com/user-attachments/assets/75e95f39-5361-4e01-b34e-1b74371b52fb" />
