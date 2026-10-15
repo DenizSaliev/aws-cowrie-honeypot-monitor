@@ -1,0 +1,13 @@
+# Claves privadas y credenciales
+*.pem
+*.key
+.env
+
+# Entornos virtuales de Python
+venv/
+alert-env/
+__pycache__/
+
+# Logs locales del honeypot
+cowrie-data/
+*.log
