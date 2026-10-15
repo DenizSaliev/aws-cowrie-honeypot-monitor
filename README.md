@@ -10,7 +10,7 @@ Despliegue de un sistema de ciberseguridad defensiva y decepción (*honeypot*) e
 
 
 
-##  Características Principales
+#  Características Principales
 
 - **Hardening del Host:** Desplazamiento del servicio OpenSSH nativo al puerto `2222` restringido por clave privada, evitando colisiones con el señuelo.
 - **Trampa de Decepción SSH:** Exposición del puerto estándar `22` mediante Cowrie en un contenedor aislado de Docker para capturar intentos de escaneo y fuerza bruta.
@@ -23,7 +23,7 @@ Despliegue de un sistema de ciberseguridad defensiva y decepción (*honeypot*) e
 
 ---
 
-##  Tecnologías Utilizadas
+#  Tecnologías Utilizadas
 
 - **Infraestructura:** AWS EC2 (Ubuntu 24.04 LTS)
 - **Contenedores:** Docker
@@ -34,15 +34,15 @@ Despliegue de un sistema de ciberseguridad defensiva y decepción (*honeypot*) e
 
 ---
 
-##  Pasos de Instalación y Puesta en Marcha
+#  Pasos de Instalación y Puesta en Marcha
 
-### 1. Modificar el puerto SSH del servidor al 2222
+## 1. Modificar el puerto SSH del servidor al 2222
 
 sudo sed -i 's/^#*Port .*/Port 2222/' /etc/ssh/sshd_config
 sudo systemctl daemon-reload
 sudo systemctl restart ssh
 
-### 2. Desplegar Cowrie en Docker (Puerto 22)
+## 2. Desplegar Cowrie en Docker (Puerto 22)
 mkdir -p ~/cowrie-data/logs ~/cowrie-data/downloads
 sudo chmod -R 777 ~/cowrie-data
 
@@ -53,13 +53,13 @@ sudo docker run -d \
   -v /home/ubuntu/cowrie-data/logs:/cowrie/cowrie-data/log \
   -v /home/ubuntu/cowrie-data/downloads:/cowrie/cowrie-data/lib/downloads \
   cowrie/cowrie:latest
-### 3. Configurar el Monitor de Alertas en Python
+## 3. Configurar el Monitor de Alertas en Python
 
-# Crear entorno virtual e instalar dependencias
+### Crear entorno virtual e instalar dependencias
 python3 -m venv ~/alert-env
 ~/alert-env/bin/pip install -r requirements.txt
 
-# Configurar el servicio systemd
+### Configurar el servicio systemd
 sudo cp honeypot-alert.service /etc/systemd/system/
 sudo systemctl daemon-reload
 sudo systemctl enable --now honeypot-alert.service
