@@ -1,54 +1,28 @@
-# 🛡️ AWS Cowrie Honeypot con Alertas en Tiempo Real y Geolocalización en Discord
+#  AWS Cowrie Honeypot con Alertas en Tiempo Real y Geolocalización en Discord
 
 Despliegue de un sistema de ciberseguridad defensiva y decepción (*honeypot*) en la nube (AWS EC2) utilizando **Cowrie** y Docker. El sistema captura ataques automatizados contra el puerto SSH estándar (22), analiza el tráfico en tiempo real mediante un monitor en Python, geolocaliza el origen de las IPs atacantes y envía alertas instantáneas estructuradas a un canal de Discord.
 
 ---
 
-## 🏗️ Arquitectura del Sistema
+##  Arquitectura del Sistema
 
-[ Atacante / Bot ]
-│
-│ Intento SSH (Puerto estándar: 22)
-▼
-┌─────────────────────────────────────────────────────────────┐
-│ Instancia AWS EC2 (Ubuntu 24.04 LTS)                        │
-│                                                             │
-│  ┌─────────────────────────┐   ┌──────────────────────────┐ │
-│  │   Honeypot Cowrie       │   │  SSH Administrativo Real │ │
-│  │   (Docker - Puerto 22)  │   │  (Puerto 2222 con .pem)  │ │
-│  │                         │   │                          │ │
-│  │   Emula shell Linux     │   │  Acceso seguro legítimo  │ │
-│  └───────────┬─────────────┘   └──────────────────────────┘ │
-│              │ Logs en tiempo real                          │
-│              ▼                                              │
-│     cowrie.log                                            │
-│              │                                              │
-│              ▼                                              │
-│  ┌─────────────────────────┐                                │
-│  │    discord_alert.py     │ ────► Geolocalización IP       │
-│  │  (Servicio systemd)     │       (ip-api.com)             │
-│  └───────────┬─────────────┘                                │
-└──────────────┼──────────────────────────────────────────────┘
-│ Webhook HTTP POST
-▼
-[ Canal de Discord ]
+<img width="724" height="664" alt="image" src="https://github.com/user-attachments/assets/81599fb7-3ea8-4345-b4ed-e9bfd400dbaa" />
 
----
 
-## 🚀 Características Principales
+##  Características Principales
 
 - **Hardening del Host:** Desplazamiento del servicio OpenSSH nativo al puerto `2222` restringido por clave privada, evitando colisiones con el señuelo.
 - **Trampa de Decepción SSH:** Exposición del puerto estándar `22` mediante Cowrie en un contenedor aislado de Docker para capturar intentos de escaneo y fuerza bruta.
 - **Enriquecimiento de Amenazas (Threat Intel):** Detección automática del país, ciudad y proveedor de Internet (ISP/ASN) de cada atacante.
 - **Alertas Automatizadas en Discord:**
-  - 🚨 Conexiones entrantes con origen geográfico.
-  - 🔑 Intentos de autenticación con usuario y contraseña probados.
-  - 💻 Comandos tecleados por el atacante en la shell emulada (`whoami`, `cat /etc/passwd`, etc.).
+  -  Conexiones entrantes con origen geográfico.
+  -  Intentos de autenticación con usuario y contraseña probados.
+  -  Comandos tecleados por el atacante en la shell emulada (`whoami`, `cat /etc/passwd`, etc.).
 - **Persistencia en el Sistema:** Daemonizado mediante un servicio de `systemd` para ejecución continua 24/7.
 
 ---
 
-## 🛠️ Tecnologías Utilizadas
+##  Tecnologías Utilizadas
 
 - **Infraestructura:** AWS EC2 (Ubuntu 24.04 LTS)
 - **Contenedores:** Docker
@@ -59,7 +33,7 @@ Despliegue de un sistema de ciberseguridad defensiva y decepción (*honeypot*) e
 
 ---
 
-## ⚙️ Pasos de Instalación y Puesta en Marcha
+##  Pasos de Instalación y Puesta en Marcha
 
 ### 1. Modificar el puerto SSH del servidor al 2222
 
