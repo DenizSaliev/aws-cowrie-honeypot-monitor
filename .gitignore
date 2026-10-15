@@ -1,0 +1,12 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+alert-env/
+
+# Cowrie data and credentials
+cowrie-data/
+*.pem
+*.key
+.env
